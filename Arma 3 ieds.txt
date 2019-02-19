@@ -1,0 +1,18 @@
+Vehicle/item IED:
+Variable name: <ied_name>
+No cook off
+
+
+
+Trigger:
+(no boundaries)
+
+No activation
+
+Condition: 
+west countSide (getPos SUICIDE_CAR nearEntities 100) > 0;
+
+On Activation: 
+bombornullanyvariablename = "BombCluster_02_cap_Ammo_F"
+createVehicle getPos SUICIDE_CAR;
+SUICIDE_CAR setDamage 100;
