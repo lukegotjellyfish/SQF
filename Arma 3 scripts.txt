@@ -1,5 +1,4 @@
 Player commands:
-
 get all players (local execute):
 _oof = "\n";
 {
@@ -192,7 +191,26 @@ if(name player == "Neko")then{
 player allowDamage false;
 -make you invincible
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Vehicles:
+
+Unlim ammo:
+this addEventHandler ["Fired",{(_this select 0) setVehicleAmmo 1}]
+
 
 MGI_1ManTank = { 
 params [["_icon",1,[0]],["_radar",1,[0]]]; 
