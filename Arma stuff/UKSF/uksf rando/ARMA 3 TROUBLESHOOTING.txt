@@ -1,0 +1,13 @@
+1. Try restarting your PC
+2. Try setting the launcher and game to run as administrator
+3. Try verifiying integrity of game files
+4. Try shutting down twice and then starting it
+5. Try updating windows
+6. Settings > Update and security > Check for updates at the top
+7. Try updating .NET Framework 4.5.2 {
+(http://www.microsoft.com/en-us/download/details.aspx?id=42642)
+(https://www.microsoft.com/en-us/download/details.aspx?id=40784)
+}
+8. Try moving your profiles into another folder and start arma
+9. [[https://arma3.com/launcher/troubleshooting]]
+
