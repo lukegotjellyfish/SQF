@@ -1,4 +1,6 @@
 RHS:
-v10,v11,v12,RHS,cantguessthis,RipVIP,happy4th,whatdowntime
+v10,v11,v12,RHS,cantguessthis,RipVIP,braai
+Expired:
+happy4th,whatdowntime
 
 Spam shake head and reload = no ammo
