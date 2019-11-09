@@ -9,7 +9,7 @@ FEH_missile = player addeventhandler ["fired", {
     (_bulletpos select 0) + (_weapdir select 0)*_dist,  
     (_bulletpos select 1) + (_weapdir select 1)*_dist,  
     (_bulletpos select 2) + (_weapdir select 2)*_dist  
-  ];  
+  ];
   _up = vectorUp _bullet;  
   _o setVectorDirAndUp[_weapdir,_up];  
   _o setVelocity velocity _bullet;}]; 

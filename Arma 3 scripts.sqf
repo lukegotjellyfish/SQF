@@ -4,10 +4,9 @@ _oof = "\n";
 {
     if (isPlayer _x) then
     {
-        _oof = _oof +name _x+"\n"+str _x+"\n"+getPlayerUID _x+"\n\n";
+        _oof = _oof +name _x+"\n"+str _x+"\n"+ getPlayerUID _x+"\n\n";
     };
 } forEach playableUnits;
-
 switch(getPlayerUID player) do
 {
     case "76561198253546520":
@@ -15,6 +14,23 @@ switch(getPlayerUID player) do
         hint Format["Username | player | playerUID\n%1", _oof];
     };
 };
+
+
+
+{
+    if (isPlayer _x) then
+    {
+        waitUntil {playerRespawnTime <= 0};
+        Player addItemToUniform "ACE_EarPlugs";
+    };
+} forEach playableUnits;
+
+
+
+
+
+
+
 
 [player, true] call ACE_captives_fnc_setHandcuffed;
 //set captive
@@ -115,6 +131,7 @@ _isLoggedInAdmin = admin 3 == 2;
 //https://community.bistudio.com/wiki/admin
 
 enableDebugConsole = 1;
+enableDebugConsole[] = {"76561198253546520"};
 //enables the debug console for me
 
 if(stealthMarkerToggle == 1) exitWith {stealthMarkerToggle = 0; onEachFrame {}; {deleteMarkerLocal _x;} forEach markerList; hint "Markers disabled";}; stealthMarkerToggle = 1; markerList = []; markerUnits = []; hint "Markers enabled - Check map!"; while {true} do { if(stealthMarkerToggle == 0) exitWith {}; { _unit = _x; markerUnits = markerUnits + [_x]; _markerName = str(format ["%1",name _x]); _mName = "m" + _markerName; //player sidechat format ["%1",_markerName]; if(side _x == side player) then { _mName = createMarkerLocal [_markerName, position _x]; _mName setMarkerSizeLocal [0.6, 0.9]; _mName setMarkerShapeLocal "ICON"; _mName setMarkerTypeLocal "mil_triangle"; _mName setMarkerColorLocal "ColorBlue"; _mName setMarkerTextLocal _markerName; _mName setMarkerDirLocal (direction _x); markerList = markerList + [_mName]; } else { _unit = _x; markerUnits = markerUnits + [_x]; _mName setMarkerSizeLocal [0.6, 0.9]; _mName = createMarkerLocal [_markerName, position _x]; _mName setMarkerShapeLocal "ICON"; _mName setMarkerTypeLocal "mil_triangle"; _mName setMarkerColorLocal "ColorRed"; _mName setMarkerTextLocal _markerName; _mName setMarkerDirLocal (direction _x); markerList = markerList + [_mName]; }; //hint format ["%1",_mName]; } forEach allUnits; sleep 1; if(stealthMarkerToggle == 0) exitWith {}; {_x setMarkerPosLocal getPos (markerUnits select (markerList find _mName)); _x setMarkerDirLocal getDir(markerUnits select (markerList find _mName));} forEach markerList; sleep 1; if(stealthMarkerToggle == 0) exitWith {}; {_x setMarkerPosLocal getPos (markerUnits select (markerList find _mName)); _x setMarkerDirLocal getDir(markerUnits select (markerList find _mName));} forEach markerList; sleep 1; if(stealthMarkerToggle == 0) exitWith {}; {_x setMarkerPosLocal getPos (markerUnits select (markerList find _mName)); _x setMarkerDirLocal getDir(markerUnits select (markerList find _mName));} forEach markerList; sleep 1; if(stealthMarkerToggle == 0) exitWith {}; {_x setMarkerPosLocal getPos (markerUnits select (markerList find _mName)); _x setMarkerDirLocal getDir(markerUnits select (markerList find _mName));} forEach markerList; sleep 1; if(stealthMarkerToggle == 0) exitWith {}; {deleteMarkerLocal _x;} forEach markerList; markerUnits = []; markerList = []; };
@@ -139,6 +156,7 @@ vehicle player setdamage 1
 //kills your vehicle
 
 player setdamage 0;
+vehicle player setdamage 0;
 //heals you
 
 _timeForRepair = 0; _vehicle = vehicle player; hint format ["Please wait %1 seconds for repair/flip",_timeForRepair]; sleep _timeForRepair; if (_vehicle == player) then {_vehicle = cursorTarget;}; _vehicle setfuel 1; _vehicle setdamage 0; _vehicle = nil; vehicle = this select 0; _vehicle setvectorup [0,0,1];
@@ -208,13 +226,15 @@ player allowDamage false;
 
 
 
+//gib 
+Player addItemToUniform "ACE_EarPlugs";
 
 
-
-Vehicles:
-
-Unlim ammo:
+//Vehicles:
+//Unlim ammo:
 this addEventHandler ["Fired",{(_this select 0) setVehicleAmmo 1}]
+
+
 
 
 MGI_1ManTank = {

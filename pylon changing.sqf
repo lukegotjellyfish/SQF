@@ -2,6 +2,19 @@
 hint str getPylonMagazines (vehicle player);
 (vehicle player) setAmmoOnPylon [5, 200];
 
+
+
+
+_i = 0;
+{
+    (vehicle player) setAmmoOnPylon [_i, 5000];
+	_i += 1;
+}forEach getPylonMagazines;
+
+
+
+
+
 //re-arm hellfires RHS apache:
 (vehicle player) setAmmoOnPylon [3, 200];
 (vehicle player) setAmmoOnPylon [4, 200];
