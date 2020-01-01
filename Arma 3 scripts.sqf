@@ -414,7 +414,7 @@ showCrewAim = 4;
 //shows crosshairs of crew
 
 
-
+player SetViewDistance 4000;
 
 //Helicopters:
 (vehicle player) setAmmoOnPylon [1, 12];
