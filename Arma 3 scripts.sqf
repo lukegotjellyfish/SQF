@@ -416,11 +416,10 @@ showCrewAim = 4;
 
 player SetViewDistance 4000;
 
-//Helicopters:
+//Aircraft:
 (vehicle player) setAmmoOnPylon [1, 12];
 //set ammo on pylon 1 to 12
 
-radarTarget = 1;
 radarTargetSize = 2.0
 //make more visible on radar
 
