@@ -127,7 +127,6 @@ player switchmove "";
 //returns to be able to move
 
 _isLoggedInAdmin = admin 3 == 2;
-//makes me admin
 //https://community.bistudio.com/wiki/admin
 
 enableDebugConsole = 1;
