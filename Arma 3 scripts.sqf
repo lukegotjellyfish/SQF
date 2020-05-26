@@ -51,16 +51,20 @@ enableCamShake false;
 allowFire = true;
 bulletA = player addAction ["Enable Bullet Cam", {YEETUS = player addEventHandler ["Fired", {
     _null = _this spawn {
+		_timestart = time;
         _missile = _this select 6;
         _cam = "camera" camCreate (position player);
         _cam cameraEffect ["External", "Back"];
         waitUntil {
             if (isNull _missile) exitWith {true};
             _cam camSetTarget _missile;
+			hint str speed _missile;
             _cam camSetRelPos [0,-8,0];
             _cam camCommit 0;
         };
-        sleep 1.4;
+		_timeend = time;
+		hint format ["Distance:%1\nTime:%2", player distance2D _cam, _timeend - _timestart];
+        sleep 0.4;
         _cam cameraEffect ["Terminate", "Back"];
         camDestroy _cam;
     };
@@ -68,6 +72,22 @@ bulletA = player addAction ["Enable Bullet Cam", {YEETUS = player addEventHandle
 bulletB = player addAction ["Disable Bullet Cam", {player removeEventHandler["Fired", YEETUS]}];
 bulletC = player addAction ["Remove BulletCam Options", {player removeaction bulletA; player removeaction bulletB; player removeaction bulletC; _var = missionNameSpace getVariable ["YEETUS",-1]; if (_var != -1) then {player removeEventHandler ["Fired", YEETUS]} else {}}];
 //bullet cam
+
+
+bulletA = player addAction ["Enable Projectile Tracker", {YEETUS = player addEventHandler ["Fired", { 
+    _null = _this spawn { 
+        _missile = _this select 6; 
+        waitUntil { 
+            if (isNull _missile) exitWith {true}; 
+   hint str speed _missile; 
+        }; 
+        sleep 1.0; 
+    }; 
+}]}]; 
+bulletB = player addAction ["Disable Projectile Tracker", {player removeEventHandler["Fired", YEETUS]}]; 
+bulletC = player addAction ["Remove Projectile Tracker Options", {player removeaction bulletA; player removeaction bulletB; player removeaction bulletC; _var = missionNameSpace getVariable ["YEETUS",-1]; if (_var != -1) then {player removeEventHandler ["Fired", YEETUS]} else {}}]; 
+//projectile speed mapper
+
 
 
 switch (name player) do
