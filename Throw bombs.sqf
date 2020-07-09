@@ -2,7 +2,7 @@ player removeeventhandler["fired", FEH_missile];
 FEH_missile = player addeventhandler ["fired", {  
   _bullet = nearestObject [_this select 0,_this select 4];  
   _bulletpos = getPosASL _bullet;  
-  _o = "Bomb_03_F" createVehicle _bulletpos;  
+  _o = "9M79B" createVehicle _bulletpos;  
   _weapdir = player weaponDirection currentWeapon player;  
   _dist = 10;  
   _o setPosASL [  
