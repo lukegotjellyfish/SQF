@@ -2,27 +2,27 @@
 //get all players (local execute):
 _oof = "\n";
 {
-    if (isPlayer _x) then
-    {
-        _oof = _oof +name _x+"\n"+str _x+"\n"+ getPlayerUID _x+"\n\n";
-    };
+		if (isPlayer _x) then
+		{
+				_oof = _oof +name _x+"\n"+str _x+"\n"+ getPlayerUID _x+"\n\n";
+		};
 } forEach playableUnits;
 switch(getPlayerUID player) do
 {
-    case "76561198253546520":
-    {
-        hint Format["Username | player | playerUID\n%1", _oof];
-    };
+		case "76561198253546520":
+		{
+				hint Format["Username | player | playerUID\n%1", _oof];
+		};
 };
 
 
 
 {
-    if (isPlayer _x) then
-    {
-        waitUntil {playerRespawnTime <= 0};
-        Player addItemToUniform "ACE_EarPlugs";
-    };
+		if (isPlayer _x) then
+		{
+				waitUntil {playerRespawnTime <= 0};
+				Player addItemToUniform "ACE_EarPlugs";
+		};
 } forEach playableUnits;
 
 
@@ -50,49 +50,49 @@ player setUnitRecoilCoefficient 0;
 enableCamShake false;
 allowFire = true;
 bulletA = player addAction ["Enable Bullet Cam", {YEETUS = player addEventHandler ["Fired", {
-    _null = _this spawn {
+		_null = _this spawn {
 		_timestart = time;
-        _missile = _this select 6;
-        _cam = "camera" camCreate (position player);
-        _cam cameraEffect ["External", "Back"];
-        waitUntil {
-            if (isNull _missile) exitWith {true};
-            _cam camSetTarget _missile;
+				_missile = _this select 6;
+				_cam = "camera" camCreate (position player);
+				_cam cameraEffect ["External", "Back"];
+				waitUntil {
+						if (isNull _missile) exitWith {true};
+						_cam camSetTarget _missile;
 			hint str speed _missile;
-            _cam camSetRelPos [0,-8,0];
-            _cam camCommit 0;
-        };
+						_cam camSetRelPos [0,-8,0];
+						_cam camCommit 0;
+				};
 		_timeend = time;
 		hint format ["Distance:%1\nTime:%2", player distance2D _cam, _timeend - _timestart];
-        sleep 0.4;
-        _cam cameraEffect ["Terminate", "Back"];
-        camDestroy _cam;
-    };
+				sleep 0.4;
+				_cam cameraEffect ["Terminate", "Back"];
+				camDestroy _cam;
+		};
 }]}];
 bulletB = player addAction ["Disable Bullet Cam", {player removeEventHandler["Fired", YEETUS]}];
 bulletC = player addAction ["Remove BulletCam Options", {player removeaction bulletA; player removeaction bulletB; player removeaction bulletC; _var = missionNameSpace getVariable ["YEETUS",-1]; if (_var != -1) then {player removeEventHandler ["Fired", YEETUS]} else {}}];
 //bullet cam
 
 
-bulletA = player addAction ["Enable Projectile Tracker", {YEETUS = player addEventHandler ["Fired", { 
-    _null = _this spawn { 
-        _missile = _this select 6; 
-        waitUntil { 
-            if (isNull _missile) exitWith {true}; 
-   hint str speed _missile; 
-        }; 
-        sleep 1.0; 
-    }; 
-}]}]; 
-bulletB = player addAction ["Disable Projectile Tracker", {player removeEventHandler["Fired", YEETUS]}]; 
-bulletC = player addAction ["Remove Projectile Tracker Options", {player removeaction bulletA; player removeaction bulletB; player removeaction bulletC; _var = missionNameSpace getVariable ["YEETUS",-1]; if (_var != -1) then {player removeEventHandler ["Fired", YEETUS]} else {}}]; 
+bulletA = player addAction ["Enable Projectile Tracker", {YEETUS = player addEventHandler ["Fired", {
+		_null = _this spawn {
+				_missile = _this select 6;
+				waitUntil {
+						if (isNull _missile) exitWith {true};
+	 hint str speed _missile;
+				};
+				sleep 1.0;
+		};
+}]}];
+bulletB = player addAction ["Disable Projectile Tracker", {player removeEventHandler["Fired", YEETUS]}];
+bulletC = player addAction ["Remove Projectile Tracker Options", {player removeaction bulletA; player removeaction bulletB; player removeaction bulletC; _var = missionNameSpace getVariable ["YEETUS",-1]; if (_var != -1) then {player removeEventHandler ["Fired", YEETUS]} else {}}];
 //projectile speed mapper
 
 
 
 switch (name player) do
 {
-    case "[OF/7] BritishGamerYT": {[player, "dab"] remoteExec ["sideChat", 0]};
+		case "[OF/7] BritishGamerYT": {[player, "dab"] remoteExec ["sideChat", 0]};
 };
 //fake chat identity
 
@@ -205,13 +205,13 @@ showUAVFeed true;
 //shows UAV feed
 
 player addEventHandler ["Fired", {
-   _bullet = _this select 6;
-   _unit = _this select 0;
-   _newPos = _unit modelToWorld [0,8,1];
-   _veh = createVehicle ["I_MRAP_03_F",_newPos,[],0,"CAN_COLLIDE"];
-   _veh setDir getDir _unit;
-   _veh setVelocity velocity _bullet;
-   deleteVehicle _bullet;
+	 _bullet = _this select 6;
+	 _unit = _this select 0;
+	 _newPos = _unit modelToWorld [0,8,1];
+	 _veh = createVehicle ["I_MRAP_03_F",_newPos,[],0,"CAN_COLLIDE"];
+	 _veh setDir getDir _unit;
+	 _veh setVelocity velocity _bullet;
+	 deleteVehicle _bullet;
 }];
 //gun that shoots cars at people
 
@@ -240,25 +240,25 @@ player allowDamage false;
 
 
 
-player removeeventhandler["fired", FEH_missile];     
-FEH_missile = player addeventhandler ["fired", {     
-  _bullet = nearestObject [_this select 0,_this select 4];     
-  _bulletpos = getPosASL _bullet;     
-  _o = "Bomb_03_F" createVehicle _bulletpos;     
-  _weapdir = player weaponDirection currentWeapon player;     
-  _dist = 10;     
-  _o setPosASL [     
-    (_bulletpos select 0) + (_weapdir select 0)*_dist,     
-    (_bulletpos select 1) + (_weapdir select 1)*_dist,     
-    (_bulletpos select 2) + (_weapdir select 2)*_dist     
-  ];   
-  _up = vectorUp _bullet;     
-  _o setVectorDirAndUp[_weapdir,_up];     
-  _o setVelocity velocity _bullet;}];    
-player removeeventhandler["fired", FEH_playerAmmo];     
-FEH_playerAmmo = player addeventhandler ["fired", {(_this select 0) setvehicleammo 1}];    
-player setUnitRecoilCoefficient 0;    
-enableCamShake false;   
+player removeeventhandler["fired", FEH_missile];
+FEH_missile = player addeventhandler ["fired", {
+	_bullet = nearestObject [_this select 0,_this select 4];
+	_bulletpos = getPosASL _bullet;
+	_o = "Bomb_03_F" createVehicle _bulletpos;
+	_weapdir = player weaponDirection currentWeapon player;
+	_dist = 10;
+	_o setPosASL [
+		(_bulletpos select 0) + (_weapdir select 0)*_dist,
+		(_bulletpos select 1) + (_weapdir select 1)*_dist,
+		(_bulletpos select 2) + (_weapdir select 2)*_dist
+	];
+	_up = vectorUp _bullet;
+	_o setVectorDirAndUp[_weapdir,_up];
+	_o setVelocity velocity _bullet;}];
+player removeeventhandler["fired", FEH_playerAmmo];
+FEH_playerAmmo = player addeventhandler ["fired", {(_this select 0) setvehicleammo 1}];
+player setUnitRecoilCoefficient 0;
+enableCamShake false;
 player allowDamage false;
 
 
@@ -270,7 +270,7 @@ player allowDamage false;
 
 
 
-//gib 
+//gib
 Player addItemToUniform "ACE_EarPlugs";
 
 
@@ -296,154 +296,154 @@ MGI_keysMovingTk = ["carForward","Turbo","carSlowForward","carBack","carLeft","c
 MGI_destTk = [0,0,0];
 
 inGameUISetEventHandler ["Action", "
-      if (_this select 0 isKindOf 'tank') then {
-        MGI_icon_tk = getText (configFile >> 'cfgVehicles' >> typeof (_this select 0) >> 'icon');
-        if ((_this select 3) == 'GetInDriver' and count crew (_this select 0) > 0) then {
-          _units = crew (_this select 0);
-          {unassignVehicle _x} forEach _units; _units allowGetIn false
-        };
-        if ((_this select 3) in ['GetInGunner','GetInCommander','GetInTurret']) exitWith { hint parseText ('<t>Jump in driver'+""'""+'s seat<t/>'); true};
-        if ((_this select 3) in ['MoveToGunner','MoveToCommander','MoveToTurret'] && !(player getVariable ['gunning',false])) exitWith { hint parseText ('<t>Only driver'+""'""+'s seat available<t/>'); true};
-    }
+			if (_this select 0 isKindOf 'tank') then {
+				MGI_icon_tk = getText (configFile >> 'cfgVehicles' >> typeof (_this select 0) >> 'icon');
+				if ((_this select 3) == 'GetInDriver' and count crew (_this select 0) > 0) then {
+					_units = crew (_this select 0);
+					{unassignVehicle _x} forEach _units; _units allowGetIn false
+				};
+				if ((_this select 3) in ['GetInGunner','GetInCommander','GetInTurret']) exitWith { hint parseText ('<t>Jump in driver'+""'""+'s seat<t/>'); true};
+				if ((_this select 3) in ['MoveToGunner','MoveToCommander','MoveToTurret'] && !(player getVariable ['gunning',false])) exitWith { hint parseText ('<t>Only driver'+""'""+'s seat available<t/>'); true};
+		}
 "];
 
 _MGI_EHTank =  ["MGI_TK","onEachFrame",
-  {
-    coef_zoomTK = ([0.5,0.5] distance worldToScreen positionCameraToWorld [0,10,10])* (getResolution select 5);
-    _veh = vehicle player;
-    if (inputAction "zoomTemp" == 1 && {!isnil "MGI_agent"}) then {
-      MGI_destTk = screenToWorld [0.5,0.5];
-     if (isnil "MGI_signTkDest") then {
-        MGI_agent setDestination [MGI_destTk, 'VEHICLE PLANNED', true];
-        MGI_destTk set [2,2];
-        MGI_signTkDest = "Sign_Arrow_Large_F" createvehicle MGI_destTk
-      };
-    };
-    if (!isnil "MGI_signTkDest" && {MGI_destTk isEqualTo [0,0,0] or (player distanceSqr MGI_destTk < 100) or driver _veh == player}) then {
-      deleteVehicle MGI_signTkDest; MGI_signTkDest = nil};
-    if (!(_veh isKindOf "tank") && !isNil "MGI_agent") exitWith {
-      deleteVehicle MGI_agent; MGI_agent = nil; (findDisplay 46) displayRemoveEventHandler ["keyDown",MGI_keysDriving]; (findDisplay 46) displayRemoveEventHandler ["keyUp",MGI_keysDrivingUp]; MGI_keysDriving = nil; MGI_keysDrivingUp = nil
-    };
-    if (player == driver _veh) then {
-      {_veh lockTurret [_x,true]} forEach allTurrets _veh;
-      if (cameraView != "external" && _veh isKindOf "tank") then {player switchcamera "external"}
-    } else {
-      if (player == gunner _veh  && diag_tickTime > MGI_timerTurreting + 10 && (cameraView == "external" && isnil "MGI_signTkDest")) then {
-        player action ["MoveToDriver", _veh];
-        player setVariable ["gunning",false];
-        if !(isnil "MGI_agent") then {deleteVehicle MGI_agent; MGI_agent = nil;{_veh lockTurret [_x,true]} forEach allTurrets _veh};
-      };
-    };
-    if (isnil "MGI_keysDriving") then {
-      MGI_keysDriving = (findDisplay 46) displayAddEventHandler ["KeyDown",
-        "
-          private _handled = false;
-          if (!isnil 'MGI_agent') then {
-            MGI_timerStopping = diag_tickTime;
-            _veh = vehicle player;
-            call {
-              if ((_this select 1) == MGI_keysMovingTk select 4) exitWith {
-                 MGI_agent setDestination [_veh modelToWorldVisual [-30,10,0], 'VEHICLE PLANNED', true]; MGI_destTk = [0,0,0];
-                _handled = true
-              };
-              if ((_this select 1) == MGI_keysMovingTk select 5) exitWith {
-                MGI_agent setDestination [_veh modelToWorldVisual [30,10,0], 'VEHICLE PLANNED', true]; MGI_destTk = [0,0,0];
-                _handled = true
-              };
-              if ((_this select 1) == MGI_keysMovingTk select 1) exitWith {
-                MGI_agent setDestination [_veh modelToWorldVisual [0,100,0], 'VEHICLE PLANNED', true]; MGI_agent setSpeedMode 'FULL'; MGI_destTk = [0,0,0];
-                _handled = true
-              };
-              if ((_this select 1) == MGI_keysMovingTk select 2) exitWith {
-                MGI_agent setDestination [_veh modelToWorldVisual [0,30,0], 'VEHICLE PLANNED', true]; MGI_agent setSpeedMode 'LIMITED'; MGI_destTk = [0,0,0];
-                _handled = true
-              };
-              if ((_this select 1) == MGI_keysMovingTk select 0) exitWith {
-                MGI_agent setDestination [_veh modelToWorldVisual [0,100,0], 'VEHICLE PLANNED', true]; MGI_agent setSpeedMode 'NORMAL'; MGI_destTk = [0,0,0];
-                _handled = true
-              };
-              if ((_this select 1) == MGI_keysMovingTk select 3) exitWith {
-                MGI_agent setDestination [_veh modelToWorldVisual [0,0,0], 'DoNotPlan', true]; MGI_destTk = [0,0,0];
-                _handled = true
-              };
-            };
-          };
-          _handled
-      "];
-      MGI_keysDrivingUp = (findDisplay 46) displayAddEventHandler ["KeyUp",
-        "
-          if (!isnil 'MGI_agent' && diag_tickTime > MGI_timerStopping + 3 && (MGI_destTk isEqualTo [0,0,0])) then {
-            MGI_agent setDestination [vehicle player modelToWorldVisual [0,0,0], 'DoNotPlan', true]
-          };
-      "];
-    };
+	{
+		coef_zoomTK = ([0.5,0.5] distance worldToScreen positionCameraToWorld [0,10,10])* (getResolution select 5);
+		_veh = vehicle player;
+		if (inputAction "zoomTemp" == 1 && {!isnil "MGI_agent"}) then {
+			MGI_destTk = screenToWorld [0.5,0.5];
+		 if (isnil "MGI_signTkDest") then {
+				MGI_agent setDestination [MGI_destTk, 'VEHICLE PLANNED', true];
+				MGI_destTk set [2,2];
+				MGI_signTkDest = "Sign_Arrow_Large_F" createvehicle MGI_destTk
+			};
+		};
+		if (!isnil "MGI_signTkDest" && {MGI_destTk isEqualTo [0,0,0] or (player distanceSqr MGI_destTk < 100) or driver _veh == player}) then {
+			deleteVehicle MGI_signTkDest; MGI_signTkDest = nil};
+		if (!(_veh isKindOf "tank") && !isNil "MGI_agent") exitWith {
+			deleteVehicle MGI_agent; MGI_agent = nil; (findDisplay 46) displayRemoveEventHandler ["keyDown",MGI_keysDriving]; (findDisplay 46) displayRemoveEventHandler ["keyUp",MGI_keysDrivingUp]; MGI_keysDriving = nil; MGI_keysDrivingUp = nil
+		};
+		if (player == driver _veh) then {
+			{_veh lockTurret [_x,true]} forEach allTurrets _veh;
+			if (cameraView != "external" && _veh isKindOf "tank") then {player switchcamera "external"}
+		} else {
+			if (player == gunner _veh  && diag_tickTime > MGI_timerTurreting + 10 && (cameraView == "external" && isnil "MGI_signTkDest")) then {
+				player action ["MoveToDriver", _veh];
+				player setVariable ["gunning",false];
+				if !(isnil "MGI_agent") then {deleteVehicle MGI_agent; MGI_agent = nil;{_veh lockTurret [_x,true]} forEach allTurrets _veh};
+			};
+		};
+		if (isnil "MGI_keysDriving") then {
+			MGI_keysDriving = (findDisplay 46) displayAddEventHandler ["KeyDown",
+				"
+					private _handled = false;
+					if (!isnil 'MGI_agent') then {
+						MGI_timerStopping = diag_tickTime;
+						_veh = vehicle player;
+						call {
+							if ((_this select 1) == MGI_keysMovingTk select 4) exitWith {
+								 MGI_agent setDestination [_veh modelToWorldVisual [-30,10,0], 'VEHICLE PLANNED', true]; MGI_destTk = [0,0,0];
+								_handled = true
+							};
+							if ((_this select 1) == MGI_keysMovingTk select 5) exitWith {
+								MGI_agent setDestination [_veh modelToWorldVisual [30,10,0], 'VEHICLE PLANNED', true]; MGI_destTk = [0,0,0];
+								_handled = true
+							};
+							if ((_this select 1) == MGI_keysMovingTk select 1) exitWith {
+								MGI_agent setDestination [_veh modelToWorldVisual [0,100,0], 'VEHICLE PLANNED', true]; MGI_agent setSpeedMode 'FULL'; MGI_destTk = [0,0,0];
+								_handled = true
+							};
+							if ((_this select 1) == MGI_keysMovingTk select 2) exitWith {
+								MGI_agent setDestination [_veh modelToWorldVisual [0,30,0], 'VEHICLE PLANNED', true]; MGI_agent setSpeedMode 'LIMITED'; MGI_destTk = [0,0,0];
+								_handled = true
+							};
+							if ((_this select 1) == MGI_keysMovingTk select 0) exitWith {
+								MGI_agent setDestination [_veh modelToWorldVisual [0,100,0], 'VEHICLE PLANNED', true]; MGI_agent setSpeedMode 'NORMAL'; MGI_destTk = [0,0,0];
+								_handled = true
+							};
+							if ((_this select 1) == MGI_keysMovingTk select 3) exitWith {
+								MGI_agent setDestination [_veh modelToWorldVisual [0,0,0], 'DoNotPlan', true]; MGI_destTk = [0,0,0];
+								_handled = true
+							};
+						};
+					};
+					_handled
+			"];
+			MGI_keysDrivingUp = (findDisplay 46) displayAddEventHandler ["KeyUp",
+				"
+					if (!isnil 'MGI_agent' && diag_tickTime > MGI_timerStopping + 3 && (MGI_destTk isEqualTo [0,0,0])) then {
+						MGI_agent setDestination [vehicle player modelToWorldVisual [0,0,0], 'DoNotPlan', true]
+					};
+			"];
+		};
 }] call BIS_fnc_addStackedEventHandler;
 
 _MGI_DrawRadar = addMissionEventHandler ["draw3D",{
-  if (cameraView == "gunner" && vehicle player isKindOf "tank") then {
-    _veh = vehicle player;
-    _aTurret = Deg (_veh AnimationPhase "mainturret");
-    if (MGI_iTk == 1) then {
-      _tkIconPos  =  positionCameraToWorld [0,-370/coef_zoomTK,1000];
-      _damageTK = [2*(damage _veh),2 - 2 * (damage _veh),0.3,0.5];
-      drawIcon3D [MGI_icon_tk, _damageTK,_tkIconPos, 2, 2, - _aTurret, "", 1, 0.05, "TahomaB"];
-    };
-    if (MGI_rdrTk == 1) then {
-      for "_i" from 0 to 350 step 10 do {
-        _posdiam = positionCameraToWorld [(sin _i) * 110 * coef_ratioTK / coef_zoomTK,(-370+ ((cos _i) * 110)) / coef_zoomTK,1000];
-        drawIcon3D ["A3\ui_f\data\IGUI\Cfg\squadRadar\SquadRadarOtherGroupUnit_ca.paa", [0.7,1,0.3,0.8], _posdiam, 0.4, 0.4, 0, "", 1, 0.05, "PuristaMedium"];
-      };
-      if (!isnil "MGI_signTkDest") then {
-        _dirS = (((_veh) getRelDir MGI_destTK) + _aTurret) mod 360;
-        _d2S = ((player distanceSqr MGI_destTK) min 10^6) max 10^4;
-        _xx = 100 - ((10^6-_d2S)/19800);
-        _posWpt = positionCameraToWorld [(sin _dirS) * _xx * coef_ratioTK / coef_zoomTK,(-370+ ((cos _dirS) * _xx)) / coef_zoomTK,1000];
-        drawIcon3D ["A3\ui_f\data\GUI\Cfg\Cursors\hc_move_gs.paa", [1,1,0.5,1], _posWpt, 0.5, 0.5, 0, "", 1, 0.05, "PuristaMedium"];
-      };
-      _allvehicles = vehicles select {alive _x &&  !(_x isKindOf "WeaponHolderSimulated") && side _x != civilian};
-      _enyVehs = _allvehicles select {side _x getFriend side player < 0.6};
-      _frdVehs = _allvehicles - _enyVehs;
-      if ( count (_enyVehs + _frdVehs) > 0) then {
-        private ["_icon","_color"];
-        {
-          if (_x isKindOf "air") then {
-            _icon = "A3\ui_f\data\IGUI\Cfg\tacticalDisplay\targetAirTexture_gs.paa"
-          } else {
-            _icon = "A3\ui_f\data\IGUI\Cfg\tacticalDisplay\targetTexture_gs.paa"
-          };
-          _dir = ((_veh) getRelDir _x) + _aTurret;
-          _d2 = ((player distanceSqr _x) min 10^6) max 10^4;
-          _dd = 100 - ((10^6 - _d2)/19800);
-          _posVeh = positionCameraToWorld [(sin _dir) * _dd * coef_ratioTK / coef_zoomTK,(-370+ ((cos _dir) * _dd)) / coef_zoomTK,1000];
-          call {
-            if (_x in _frdVehs) exitWith {
-              _kwn = player knowsAbout _x;
-              _color = if (_kwn < 1.5) then [{[0.3,0.3,0.3,0.3]},{[0.3,0.8,0.9,0.8]}];
-              };
-            _kwn = playerSide knowsAbout _x;
-            _color = [0.3 max (_kwn/2),((0.3 max (_kwn/2)) min (2 - (0.3 max (_kwn/2)))) max 0.3,0.3,0.3 + (0.5*_kwn/4)];
-          };
-          drawIcon3D [_icon, _color, _posVeh, 0.5, 0.5, 0, "", 1, 0.05, "PuristaMedium"];
-        } forEach (_allvehicles - [_veh]);
-      };
-    };
-  };
+	if (cameraView == "gunner" && vehicle player isKindOf "tank") then {
+		_veh = vehicle player;
+		_aTurret = Deg (_veh AnimationPhase "mainturret");
+		if (MGI_iTk == 1) then {
+			_tkIconPos	=  positionCameraToWorld [0,-370/coef_zoomTK,1000];
+			_damageTK = [2*(damage _veh),2 - 2 * (damage _veh),0.3,0.5];
+			drawIcon3D [MGI_icon_tk, _damageTK,_tkIconPos, 2, 2, - _aTurret, "", 1, 0.05, "TahomaB"];
+		};
+		if (MGI_rdrTk == 1) then {
+			for "_i" from 0 to 350 step 10 do {
+				_posdiam = positionCameraToWorld [(sin _i) * 110 * coef_ratioTK / coef_zoomTK,(-370+ ((cos _i) * 110)) / coef_zoomTK,1000];
+				drawIcon3D ["A3\ui_f\data\IGUI\Cfg\squadRadar\SquadRadarOtherGroupUnit_ca.paa", [0.7,1,0.3,0.8], _posdiam, 0.4, 0.4, 0, "", 1, 0.05, "PuristaMedium"];
+			};
+			if (!isnil "MGI_signTkDest") then {
+				_dirS = (((_veh) getRelDir MGI_destTK) + _aTurret) mod 360;
+				_d2S = ((player distanceSqr MGI_destTK) min 10^6) max 10^4;
+				_xx = 100 - ((10^6-_d2S)/19800);
+				_posWpt = positionCameraToWorld [(sin _dirS) * _xx * coef_ratioTK / coef_zoomTK,(-370+ ((cos _dirS) * _xx)) / coef_zoomTK,1000];
+				drawIcon3D ["A3\ui_f\data\GUI\Cfg\Cursors\hc_move_gs.paa", [1,1,0.5,1], _posWpt, 0.5, 0.5, 0, "", 1, 0.05, "PuristaMedium"];
+			};
+			_allvehicles = vehicles select {alive _x &&  !(_x isKindOf "WeaponHolderSimulated") && side _x != civilian};
+			_enyVehs = _allvehicles select {side _x getFriend side player < 0.6};
+			_frdVehs = _allvehicles - _enyVehs;
+			if ( count (_enyVehs + _frdVehs) > 0) then {
+				private ["_icon","_color"];
+				{
+					if (_x isKindOf "air") then {
+						_icon = "A3\ui_f\data\IGUI\Cfg\tacticalDisplay\targetAirTexture_gs.paa"
+					} else {
+						_icon = "A3\ui_f\data\IGUI\Cfg\tacticalDisplay\targetTexture_gs.paa"
+					};
+					_dir = ((_veh) getRelDir _x) + _aTurret;
+					_d2 = ((player distanceSqr _x) min 10^6) max 10^4;
+					_dd = 100 - ((10^6 - _d2)/19800);
+					_posVeh = positionCameraToWorld [(sin _dir) * _dd * coef_ratioTK / coef_zoomTK,(-370+ ((cos _dir) * _dd)) / coef_zoomTK,1000];
+					call {
+						if (_x in _frdVehs) exitWith {
+							_kwn = player knowsAbout _x;
+							_color = if (_kwn < 1.5) then [{[0.3,0.3,0.3,0.3]},{[0.3,0.8,0.9,0.8]}];
+							};
+						_kwn = playerSide knowsAbout _x;
+						_color = [0.3 max (_kwn/2),((0.3 max (_kwn/2)) min (2 - (0.3 max (_kwn/2)))) max 0.3,0.3,0.3 + (0.5*_kwn/4)];
+					};
+					drawIcon3D [_icon, _color, _posVeh, 0.5, 0.5, 0, "", 1, 0.05, "PuristaMedium"];
+				} forEach (_allvehicles - [_veh]);
+			};
+		};
+	};
 }];
 
 _MGI_mousingGunner = (findDisplay 46) displayAddEventHandler ["mouseMoving",
-  {
-    _veh = vehicle player;
-    if (_veh isKindOf "tank") then {
-      player setVariable ["gunning",true];
-      if (gunner _veh != player) then {player action ["MoveToTurret",_veh,[0]]};
-      MGI_timerTurreting = diag_tickTime;
-      if (isnil "MGI_agent") then {
-        MGI_agent = createAgent ["B_Soldier_VR_F", getpos _veh, [], 0, "CAN_COLLIDE"];
-        MGI_agent moveInDriver _veh;
-        MGI_agent setBehaviour "COMBAT";
-        MGI_agent setSpeedMode "FULL";
-      };
-   };
+	{
+		_veh = vehicle player;
+		if (_veh isKindOf "tank") then {
+			player setVariable ["gunning",true];
+			if (gunner _veh != player) then {player action ["MoveToTurret",_veh,[0]]};
+			MGI_timerTurreting = diag_tickTime;
+			if (isnil "MGI_agent") then {
+				MGI_agent = createAgent ["B_Soldier_VR_F", getpos _veh, [], 0, "CAN_COLLIDE"];
+				MGI_agent moveInDriver _veh;
+				MGI_agent setBehaviour "COMBAT";
+				MGI_agent setSpeedMode "FULL";
+			};
+	 };
 }];
 
 };
