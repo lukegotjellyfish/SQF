@@ -75,14 +75,14 @@ bulletC = player addAction ["Remove BulletCam Options", {player removeaction bul
 
 
 bulletA = player addAction ["Enable Projectile Tracker", {YEETUS = player addEventHandler ["Fired", {
-		_null = _this spawn {
-				_missile = _this select 6;
-				waitUntil {
-						if (isNull _missile) exitWith {true};
-	 hint str speed _missile;
-				};
-				sleep 1.0;
+	_null = _this spawn {
+		_missile = _this select 6;
+		waitUntil {
+			if (isNull _missile) exitWith {true};
+			hint str speed _missile;
 		};
+		sleep 1.0;
+	};
 }]}];
 bulletB = player addAction ["Disable Projectile Tracker", {player removeEventHandler["Fired", YEETUS]}];
 bulletC = player addAction ["Remove Projectile Tracker Options", {player removeaction bulletA; player removeaction bulletB; player removeaction bulletC; _var = missionNameSpace getVariable ["YEETUS",-1]; if (_var != -1) then {player removeEventHandler ["Fired", YEETUS]} else {}}];
