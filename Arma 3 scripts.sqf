@@ -50,24 +50,27 @@ player setUnitRecoilCoefficient 0;
 enableCamShake false;
 allowFire = true;
 bulletA = player addAction ["Enable Bullet Cam", {YEETUS = player addEventHandler ["Fired", {
-		_null = _this spawn {
+	_null = _this spawn {
 		_timestart = time;
-				_missile = _this select 6;
-				_cam = "camera" camCreate (position player);
-				_cam cameraEffect ["External", "Back"];
-				waitUntil {
-						if (isNull _missile) exitWith {true};
-						_cam camSetTarget _missile;
+		_missile = _this select 6;
+		_cam = "camera" camCreate (position player);
+		_cam cameraEffect ["External", "Back"];
+		while {!(isNull _missile)} do {
+			_cam camSetTarget getPos _missile;
+			camdistance = player distance2D _cam;
+			_timeend = time;
+			camposition = getPos _missile;
 			hint str speed _missile;
-						_cam camSetRelPos [0,-8,0];
-						_cam camCommit 0;
-				};
-		_timeend = time;
-		hint format ["Distance:%1\nTime:%2", player distance2D _cam, _timeend - _timestart];
-				sleep 0.4;
-				_cam cameraEffect ["Terminate", "Back"];
-				camDestroy _cam;
+			_cam camSetRelPos [2,-8,5];
+			_cam camCommit 0;
+			SystemChat format ["Distance: %1 - Time: %2 - Pos: %3", camdistance, _timeend - _timestart, camposition];
 		};
+		sleep 2;
+		//Can't show hints while in a camera (big sad)
+		hintSilent format ["Distance: %1\nTime: %2\nLanded: %3", camdistance, _timeend - _timestart, camposition];
+		_cam cameraEffect ["Terminate", "Back"];
+		camDestroy _cam;
+	};
 }]}];
 bulletB = player addAction ["Disable Bullet Cam", {player removeEventHandler["Fired", YEETUS]}];
 bulletC = player addAction ["Remove BulletCam Options", {player removeaction bulletA; player removeaction bulletB; player removeaction bulletC; _var = missionNameSpace getVariable ["YEETUS",-1]; if (_var != -1) then {player removeEventHandler ["Fired", YEETUS]} else {}}];
@@ -77,11 +80,9 @@ bulletC = player addAction ["Remove BulletCam Options", {player removeaction bul
 bulletA = player addAction ["Enable Projectile Tracker", {YEETUS = player addEventHandler ["Fired", {
 	_null = _this spawn {
 		_missile = _this select 6;
-		waitUntil {
-			if (isNull _missile) exitWith {true};
+		while {!(isNull _missile)} do {
 			hint str speed _missile;
 		};
-		sleep 1.0;
 	};
 }]}];
 bulletB = player addAction ["Disable Projectile Tracker", {player removeEventHandler["Fired", YEETUS]}];
