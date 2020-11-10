@@ -1,0 +1,61 @@
+AH-64 vs 3UBR11:
+(side on)
+4 shots below the rotor to set it on fire
+One shot through the wing to set it on fire
+Two shots under the cockpit to set it on fire
+Two shots through the exhaust to blow it up immediately
+Two shots around the exhaust to set it on fire
+Four shots at the base of the tail to set it on fire
+(front on)
+5 shots through the exhaust to blow it up immediately
+2 shots through the pilot's cockpit glass to set it on fire
+5 shots through the gunner's cockpit glass to set it on fire
+3 shots to the bulges around the sides of the front to set it on fire
+4 shots between the gunner glass and camera unit to set it on fire
+
+UH-60 vs 3UBR11:
+(side on)
+3 shots to the exhaust to blow it up immediately
+3 shots forward of the exhaust to set it on fire
+7 shots through structure of helicopter (area slightly past base of tail is immune) to set it on fire
+(front on)
+2 shots through the nose to set it on fire
+2 shots through central cockpit glass to set it on fire
+4 shots through side cockpit glass to set it on fire
+1 shot to the center of the rotor area to set it on fire
+2 shots to the air intake or exhaust to set it on fire
+
+AH-6M vs 3UBR11:
+(side on)
+2-3 shots under the cockpit to set it on fire
+2 shots to the metal dividing the cockpit and back area (and the metal under this) to set it on fire
+(front on)
+2 shots through the cockpit to set it on fire
+
+AH-1Z vs 3UBR11:
+(side on)
+3 shots almost anywhere but the tail to set it on fire
+2 shots through the exhaust to set it on fire
+(front on)
+2 shots anywhere on the main body but the wings and rotor area
+
+CH-53E:
+(side on)
+fuckton of shots (inconsistant and depending where you hit (managed to get the damaged texture but 50 shots and no fire)) through the front of the second intake or above first intake to blow it up
+2 shots through the cockpit to set it on fire
+2 shots to the front of the first intake to set it on fire
+3 shots to the first exhaust to set it on fire
+6-7 shots anywhere but the tail to set it on fire
+(front on)
+2-1 shots through the cockpit to set it on fire
+~18 of shots through the exhausts to blow it up
+
+UH-1Y vs 3UBR11:
+(side on)
+1 shot to the exhaust to blow it up immediately
+2-3 shots anywhere but the tail to set it on fire
+(front on)
+1 shot through the first 1/3 (from the bottom) to set on fire
+1 shot through the rest of the main body to blow it up immediately
+2 shots through the area on level (and including) the air intakes to blow it up immediately
+fuckton of shots through the rotor area to blow it up
