@@ -57,17 +57,17 @@ bulletA = player addAction ["Enable Bullet Cam", {YEETUS = player addEventHandle
 		_cam cameraEffect ["External", "Back"];
 		while {!(isNull _missile)} do {
 			_cam camSetTarget getPos _missile;
-			camdistance = player distance2D _cam;
+			missileDistance = player distance2D _missile;
 			_timeend = time;
-			camposition = getPos _missile;
-			hint str speed _missile;
+			_missilePos = getPos _missile;
+			systemChat str (3.6 * (velocityModelSpace _missile select 1));
 			_cam camSetRelPos [2,-8,5];
 			_cam camCommit 0;
-			SystemChat format ["Distance: %1 - Time: %2 - Pos: %3", camdistance, _timeend - _timestart, camposition];
+			diag_log format ["%1 | Time: %2 | Pos: %3", missileDistance, _timeend - _timestart, _missilePos];
 		};
 		sleep 2;
 		//Can't show hints while in a camera (big sad)
-		hintSilent format ["Distance: %1\nTime: %2\nLanded: %3", camdistance, _timeend - _timestart, camposition];
+		hintSilent format ["Distance: %1\nTime: %2\nLanded: %3", missileDistance, _timeend - _timestart, _missilePos];
 		_cam cameraEffect ["Terminate", "Back"];
 		camDestroy _cam;
 	};
@@ -77,11 +77,12 @@ bulletC = player addAction ["Remove BulletCam Options", {player removeaction bul
 //bullet cam
 
 
-bulletA = player addAction ["Enable Projectile Tracker", {YEETUS = player addEventHandler ["Fired", {
+bulletA = player addAction ["Enable Projectile Tracker", {YEETUS = vehicle player addEventHandler ["Fired", {
 	_null = _this spawn {
 		_missile = _this select 6;
 		while {!(isNull _missile)} do {
-			hint str speed _missile;
+			//hint format["Distance: %1\nSpeed: %2", player distance2D _missile, speed _missile];
+			diag_log(format["Distance: %1 | Velocity: %2", player distance2D _missile, (3.6 * (velocityModelSpace _missile select 1))]);
 		};
 	};
 }]}];
@@ -93,7 +94,7 @@ bulletC = player addAction ["Remove Projectile Tracker Options", {player removea
 
 switch (name player) do
 {
-		case "[OF/7] BritishGamerYT": {[player, "dab"] remoteExec ["sideChat", 0]};
+	case "[OF/7] BritishGamerYT": {[player, "dab"] remoteExec ["sideChat", 0]};
 };
 //fake chat identity
 
@@ -101,7 +102,6 @@ switch (name player) do
 _unit = vehicle player;
 _unit call BIS_fnc_diagBulletCam;
 _ehIndex = _unit getVariable "bis_fnc_diagBulletCam_fired";
-sleep 20;
 _unit removeEventHandler ["fired", _ehIndex];
 //VEHICLE BULLET CAM
 
